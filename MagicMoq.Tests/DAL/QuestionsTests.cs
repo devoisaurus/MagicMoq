@@ -223,7 +223,7 @@ namespace MagicMoq.Tests.DAL
 
             //Act
             int expected_result = 2;
-            int actual_result = questions.FourMinusTwoPlusOne();
+            int actual_result = questions.FourMinusTwo();
 
             //Assert
             Assert.AreEqual(expected_result, actual_result);
@@ -239,13 +239,15 @@ namespace MagicMoq.Tests.DAL
         [TestMethod]
         public void EnsureFirstThreeEvenIntsReturnsListOfThreeEvenInts()
         {
-            // Write this test
+            Mock<Answers> mock_answers = new Mock<Answers>();
+            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { });
         }
 
         [TestMethod]
         public void EnsureFirstThreeOddIntsReturnsListOfThreeOddInts()
         {
-            // Write this test
+            Mock<Answers> mock_answers = new Mock<Answers>();
+            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { });
         }
 
         [TestMethod]
