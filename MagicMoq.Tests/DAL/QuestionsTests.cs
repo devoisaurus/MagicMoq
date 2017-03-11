@@ -233,21 +233,52 @@ namespace MagicMoq.Tests.DAL
         public void EnsureCountToFiveReturnsListOfFiveInts()
         {
             Mock<Answers> mock_answers = new Mock<Answers>();
-            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { });
+            mock_answers.Setup(a => a.ListOfNInts(It.Is<int>(i => i == 5))).Returns(new List<int> { 1, 2, 3, 4, 5 });
+            Questions questions = new Questions(mock_answers.Object);
+
+            List<int> expected_result = new List<int> { 1, 2, 3, 4, 5 };
+            List<int> actual_result = questions.CountToFive();
+
+            CollectionAssert.AreEqual(expected_result, actual_result);
+            
         }
 
         [TestMethod]
         public void EnsureFirstThreeEvenIntsReturnsListOfThreeEvenInts()
         {
+            //Arrange
             Mock<Answers> mock_answers = new Mock<Answers>();
-            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { });
+
+            //i needs to be large enough so you get a list that CONTAINS 3 even numbers
+            mock_answers.Setup(a => a.ListOfNInts(It.Is<int>(i => i == 10))).Returns(new List<int> {1, 2, 3, 4, 5, 6 });
+            Questions questions = new Questions(mock_answers.Object);
+
+            //Act
+            List<int> expected_result = new List<int> { 2, 4, 6 };
+            List<int> actual_result = questions.FirstThreeEvenInts();
+
+            //Assert
+            // 1. Collection Assert
+            CollectionAssert.AreEqual(expected_result, actual_result);
         }
 
         [TestMethod]
         public void EnsureFirstThreeOddIntsReturnsListOfThreeOddInts()
         {
+            //Arrange
             Mock<Answers> mock_answers = new Mock<Answers>();
-            mock_answers.Setup(a => a.ListOfNInts(It.IsAny<int>())).Returns(new List<int> { });
+
+            //i needs to be large enough so you get a list that CONTAINS 3 odd numbers
+            mock_answers.Setup(a => a.ListOfNInts(It.Is<int>(i => i == 10))).Returns(new List<int> { 1, 2, 3, 4, 5, 6 });
+            Questions questions = new Questions(mock_answers.Object);
+
+            //Act
+            List<int> expected_result = new List<int> { 1, 3, 5 };
+            List<int> actual_result = questions.FirstThreeOddInts();
+
+            //Assert
+            // 1. Collection Assert
+            CollectionAssert.AreEqual(expected_result, actual_result);
         }
 
         [TestMethod]
