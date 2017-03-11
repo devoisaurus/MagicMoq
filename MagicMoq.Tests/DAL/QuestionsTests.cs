@@ -19,7 +19,12 @@ namespace MagicMoq.Tests.DAL
             mock_answers = new Mock<Answers>();
             questions = new Questions(mock_answers.Object);
             
+                        
+        }
 
+        private void MyHelperMethod()
+        {
+            //do stuff. but is not a test
         }
 
         [TestCleanup]
